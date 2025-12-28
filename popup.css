@@ -1,0 +1,37 @@
+body {
+  font-family: Arial, sans-serif;
+  width: 300px;
+  padding: 10px;
+  background: #111;
+  color: #fff;
+}
+
+h2 {
+  text-align: center;
+}
+
+input, textarea {
+  width: 100%;
+  margin: 6px 0;
+  padding: 6px;
+  border-radius: 5px;
+  border: none;
+}
+
+textarea {
+  min-height: 60px;
+  resize: none;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  width: 48%;
+  padding: 6px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+}
