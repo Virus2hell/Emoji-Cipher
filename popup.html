@@ -1,71 +1,49 @@
-<!-- Updated popup.html - matches your screenshot exactly -->
+<!-- popup.html - Toggle-based single panel UI -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>EmojiCipher</title>
-  <link rel="stylesheet" href="popup.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EmojiCipher</title>
+    <link rel="stylesheet" href="popup.css" />
 </head>
+
 <body>
-  <!-- Encrypt Section -->
-  <h2>Text ➜ Emojis</h2>
-  
-  <div class="input-group">
-    <label class="section-title">1. Type a message</label>
-    <textarea 
-      id="input" 
-      placeholder="Hello World or write some javascript code"
-    ></textarea>
-  </div>
+    <h2>Text ↔ Emojis</h2>
 
-  <div class="input-group">
-    <label class="section-title">2. Set a password</label>
-    <input 
-      id="key" 
-      type="password" 
-      placeholder="Eg. 1234"
-    />
-  </div>
-
-  <div class="buttons">
-    <button id="encode">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-      </svg>
-      Encrypt Text
-    </button>
-  </div>
-
-  <!-- Decrypt Section -->
-  <div class="decrypt-section">
-    <h2>Emojis ➜ Text</h2>
-    
-    <div class="input-group">
-      <label class="section-title">1. Paste encrypted emojis</label>
-      <textarea 
-        id="decryptInput" 
-        placeholder="Paste encrypted emojis here"
-      ></textarea>
+    <!-- Toggle Switch -->
+    <div class="toggle-container">
+        <span class="toggle-label" id="toggleLabel">Text → Emojis</span>
+        <div class="toggle-switch" id="toggleSwitch">
+            <div class="toggle-slider"></div>
+        </div>
     </div>
 
-    <div class="input-group">
-      <label class="section-title">2. Type the password</label>
-      <input 
-        id="decryptKey" 
-        type="password" 
-        placeholder="Eg. 1234"
-      />
+    <!-- Dynamic Content -->
+    <div id="content">
+        <!-- Text → Emoji (default) -->
+        <div class="input-group">
+            <label class="section-title">1. Type a message</label>
+            <textarea id="input" placeholder="Hello World or write some javascript code"></textarea>
+        </div>
+
+        <div class="input-group">
+            <label class="section-title">2. Set a password</label>
+            <input id="key" type="password" placeholder="Eg. 1234" />
+        </div>
+
+        <button id="actionBtn">
+            🔐 Encrypt Text
+        </button>
     </div>
 
-    <button id="decode" class="full-width">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7 3.69v8z"/>
-      </svg>
-      Decrypt Emojis
-    </button>
-  </div>
+    <!-- Output -->
+    <div class="output">
+        <textarea id="output" placeholder="Result will appear here..." readonly></textarea>
+    </div>
 
-  <script src="popup.js"></script>
+    <script src="popup.js"></script>
 </body>
+
 </html>
