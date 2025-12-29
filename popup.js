@@ -1,8 +1,23 @@
 const emojiMap = [
+  // Faces (original 38)
   "😀","😁","😂","🤣","😃","😄","😅","😆","😉","😊",
   "😋","😎","😍","😘","🥰","😗","😙","😚","🙂","🤗",
-  "🤩","🤔","🤨","😐","😑","😶","🙄","😏","😣",
-  "😥","😮","🤐","😯","😪","😫","🥱","😴","😌"
+  "🤩","🤔","🤨","😐","😑","😶","🙄","😏","😣","😥",
+  "😮","🤐","😯","😪","😫","🥱","😴","😌","😛","😜",
+  
+  // Animals & Birds (40+)
+  "🐶","🐱","🐭","🐹","🐰","🦊","🐻","🐼","🐨","🐯",
+  "🦁","🐮","🐷","🐽","🐸","🐵","🙈","🙉","🙊","🐒",
+  "🐔","🐧","🐦","🐤","🐣","🐥","🦆","🦅","🦉","🦇",
+  "🐺","🐗","🐴","🦓","🦌","🐭","🐁","🐀","🐿️","🦔",
+  
+  // Fruits (20+)
+  "🍎","🍐","🍊","🍋","🍌","🍉","🍇","🍓","🫐","🍈",
+  "🍒","🍑","🥭","🍍","🥥","🥝","🍅","🍆","🥑","🥦",
+  
+  // Vegetables (15+)
+  "🥬","🥒","🌶️","🫑","🥕","🌽","🥔","🍠","🫚","🧄",
+  "🧅","🥜","🌰","🫘","🍄","🫐"
 ];
 
 function xorCipher(text, key) {
@@ -18,9 +33,8 @@ function xorCipher(text, key) {
 function encodeText(text, key) {
   const encrypted = xorCipher(text, key);
   let emojiString = "";
-
   for (let char of encrypted) {
-    const index = char.charCodeAt(0) % emojiMap.length;
+    const index = Math.abs(char.charCodeAt(0)) % emojiMap.length;
     emojiString += emojiMap[index];
   }
   return emojiString;
@@ -28,26 +42,47 @@ function encodeText(text, key) {
 
 function decodeText(emojiString, key) {
   let encrypted = "";
-
   for (let emoji of [...emojiString]) {
     const index = emojiMap.indexOf(emoji);
     if (index === -1) continue;
     encrypted += String.fromCharCode(index);
   }
-
   return xorCipher(encrypted, key);
 }
 
+// Encode functionality
 document.getElementById("encode").onclick = () => {
   const text = document.getElementById("input").value;
   const key = document.getElementById("key").value;
-  if (!key) return alert("Enter secret key");
-  document.getElementById("output").value = encodeText(text, key);
+  if (!text.trim()) return alert("Enter a message to encrypt");
+  if (!key.trim()) return alert("Enter secret key");
+  
+  try {
+    const result = encodeText(text, key);
+    navigator.clipboard.writeText(result).then(() => {
+      document.getElementById("input").value = result;
+      alert(`Encrypted! (${emojiMap.length} emojis available)\nCopied to clipboard.`);
+    });
+  } catch (e) {
+    alert("Encryption failed. Try a different key.");
+  }
 };
 
+// Decode functionality  
 document.getElementById("decode").onclick = () => {
-  const text = document.getElementById("input").value;
-  const key = document.getElementById("key").value;
-  if (!key) return alert("Enter secret key");
-  document.getElementById("output").value = decodeText(text, key);
+  const emojiString = document.getElementById("decryptInput").value;
+  const key = document.getElementById("decryptKey").value;
+  
+  if (!emojiString.trim()) return alert("Paste encrypted emojis");
+  if (!key.trim()) return alert("Enter secret key");
+  
+  try {
+    const result = decodeText(emojiString, key);
+    navigator.clipboard.writeText(result).then(() => {
+      document.getElementById("decryptInput").value = result;
+      alert(`Decrypted! (${emojiMap.length} emojis supported)\nCopied to clipboard.`);
+    });
+  } catch (e) {
+    alert("Decryption failed. Check key or emoji string.");
+  }
 };

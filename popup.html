@@ -1,24 +1,70 @@
+<!-- Updated popup.html - matches your screenshot exactly -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Emoji Cipher</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EmojiCipher</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-
-  <h2>🔐 Emoji Cipher</h2>
-
-  <input id="key" type="password" placeholder="Secret Key" />
-
-  <textarea id="input" placeholder="Enter text or emoji string"></textarea>
-
-  <div class="buttons">
-    <button id="encode">Encode ➜ 😄</button>
-    <button id="decode">Decode ➜ 🔓</button>
+  <!-- Encrypt Section -->
+  <h2>Text ➜ Emojis</h2>
+  
+  <div class="input-group">
+    <label class="section-title">1. Type a message</label>
+    <textarea 
+      id="input" 
+      placeholder="Hello World or write some javascript code"
+    ></textarea>
   </div>
 
-  <textarea id="output" placeholder="Result" readonly></textarea>
+  <div class="input-group">
+    <label class="section-title">2. Set a password</label>
+    <input 
+      id="key" 
+      type="password" 
+      placeholder="Eg. 1234"
+    />
+  </div>
+
+  <div class="buttons">
+    <button id="encode">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+      </svg>
+      Encrypt Text
+    </button>
+  </div>
+
+  <!-- Decrypt Section -->
+  <div class="decrypt-section">
+    <h2>Emojis ➜ Text</h2>
+    
+    <div class="input-group">
+      <label class="section-title">1. Paste encrypted emojis</label>
+      <textarea 
+        id="decryptInput" 
+        placeholder="Paste encrypted emojis here"
+      ></textarea>
+    </div>
+
+    <div class="input-group">
+      <label class="section-title">2. Type the password</label>
+      <input 
+        id="decryptKey" 
+        type="password" 
+        placeholder="Eg. 1234"
+      />
+    </div>
+
+    <button id="decode" class="full-width">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7 3.69v8z"/>
+      </svg>
+      Decrypt Emojis
+    </button>
+  </div>
 
   <script src="popup.js"></script>
 </body>
